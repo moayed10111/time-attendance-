@@ -2,11 +2,12 @@ const { models: { Roles } } = require("../db");
 
 
 
-const newRole = async () => {
+const newRole = async ({roleName}) => {
     try {
         await Roles.query().insert({
-            role_name: "accountant"
+            role_name: roleName
         })
+        return roleName;
     } catch (err) {
         throw new Error(err.message)
     }

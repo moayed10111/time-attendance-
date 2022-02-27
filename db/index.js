@@ -1,5 +1,5 @@
 const { Model } = require('objection');
-const knex = require('knex');
+const knex = require('knex');//query builder
 const models = require('./models/')
 
 const db = knex({

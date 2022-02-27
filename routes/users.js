@@ -1,30 +1,40 @@
-
 const express = require('express');
-const newRole = require('../controller/roles');
-const app = express();
-const addUser = require('../controller/users');
+const { addUser, getUser, allUsers } = require('../controller/users');
+const router = express.Router();
 
 
-
-app.post('/addUser', async (req, res, next) => {
+router.post('/users', async (req, res, next) => {
     try {
-        const creatUser = await addUser();
-        res.status(200).json("ok")
+        const { body } = req;
+
+        const createdUser = await addUser(body);
+        res.status(200).json({ createdUser })
     } catch (error) {
-        next(error);
+        next(error)
     }
 });
 
-app.post('/addRole', (req, res, next) => {
+router.get('/user', async (req, res, next) => {
     try {
-        newRole();
-        res.status(200).json("ok")
+        const { query } = req;
+        const user = await getUser(query);
+        res.status(200).json({ user })
     } catch (error) {
         next(error)
     }
 
+});
+
+router.get('/users', async(req, res, next)=>{
+    try {
+        const {query} = req;
+        const users = await allUsers();
+        res.status(200).json({users})
+    
+    } catch (error) {
+        next(error)
+    }
 })
-module.exports = app;
 
 
-
+module.exports = router;
