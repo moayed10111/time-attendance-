@@ -1,6 +1,7 @@
 const { Model } = require('objection');
 
 
+
 class Users extends Model {
     static get tableName() {
         return "users"
@@ -11,10 +12,27 @@ class Users extends Model {
             type: 'object',
             properties: {
                 id: { type: 'integer', readOnly: true },
-                full_name: { type: 'string' },
+                fullName: { type: 'string' },
+                email: { type: 'string' },
+                password: { type: 'string' },
+                role_id: { type: "integer" }
             }
         }
     }
+    static get relationMappings() {
+        const Roles  = require('./roles')
+        return{
+        roles: {
+            relation: Model.BelongsToOneRelation,
+            modleClass: Roles,
+            join: {
+                from: 'users.role_id',
+                to: "role_id"
+            }
+        }
+    }}
+
+
 };
 
 module.exports = Users;
