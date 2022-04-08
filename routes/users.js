@@ -10,6 +10,7 @@ router.post('/signup', async (req, res, next) => {
         const createdUser = await addUser(body);
         res.status(200).json({ createdUser })
     } catch (error) {
+      
         next(error)
     }
 });

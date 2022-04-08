@@ -1,6 +1,7 @@
 const { models: { Users } } = require("../db");
 const { generateToken } = require("../middleware/auth");
-const { models: { Roles } } = require("../db")
+const ErrorHandleing = require("../helpers/error_handleing");
+const { notFoundError: { message, statusCode } } = require("../helpers/error_types");
 
 
 const addUser = async ({ fullName, email, phone_number, password, role_id }) => {
@@ -15,7 +16,7 @@ const addUser = async ({ fullName, email, phone_number, password, role_id }) => 
 
         return newUser;
     } catch (error) {
-        throw new Error(error.message)
+        throw new ErrorHandleing(message, statusCode);
     }
 
 };
@@ -35,14 +36,13 @@ const login = async ({ email, password }) => {
     }
 };
 
-const getUser = async ({ fullName }) => {
+const getUser = async (id) => {
     try {
-        console.log(fullName)
-        // I will use the withGraphFetche her .withGraphFetched('roles')
-        const getUser = await Users.query().findOne({fullName:fullName})
+        const getUser = await Users.query().withGraphFetched('roles').findOne(id);
         return getUser;
     } catch (error) {
-        throw new Error(error.message) 
+        console.log(error);
+        throw new ErrorHandleing(message, statusCode);
     }
 
 };

@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const generateToken = (payload) => {
     const token = jwt.sign({name:payload},'Moayed',{
         algorithm:'HS256',
-        expiresIn:'1d',
+        expiresIn:'7d',
     });
     return token
 };

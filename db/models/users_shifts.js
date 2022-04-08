@@ -23,10 +23,10 @@ class Users_shifts extends Model {
         return{
         users: {
             relation: Model.BelongsToOneRelation,
-            modleClass: Users,
+            modelClass: Users,
             join: {
                 from: 'user_shifts.user_id',
-                to: "user_id"
+                to: "users.id"
             }
         },
     
@@ -35,7 +35,7 @@ class Users_shifts extends Model {
             modelClass: Shifts,
             join: {
                 from:'user_shifts.shift_id',
-                to:'shift_id'
+                to:'shifts.id'
             }
         }
     

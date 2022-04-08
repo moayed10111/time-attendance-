@@ -4,7 +4,7 @@ const { models: { Roles } } = require("../db");
 
 const newRole = async ({ roleName }) => {
     try {
-        const role = await Roles.query().insert({
+        const role = await Roles.query().insertAndFetch({
             role_name: roleName
         })
         return role;

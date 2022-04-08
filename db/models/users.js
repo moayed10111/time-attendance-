@@ -24,10 +24,10 @@ class Users extends Model {
         return{
         roles: {
             relation: Model.BelongsToOneRelation,
-            modleClass: Roles,
+            modelClass: Roles,
             join: {
                 from: 'users.role_id',
-                to: "role_id"
+                to: 'roles.id'
             }
         }
     }}
