@@ -17,10 +17,11 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-const publicRoutes = ['/auth/login', '/auth/signup','/api-docs/']
+const publicRoutes = ['auth','docs']
 app.use((req, res, next) => {
-  console.log(publicRoutes.includes(req.originalUrl))
-  if (publicRoutes.includes(req.originalUrl)) {
+   const url=req.originalUrl.split("/");
+   const baseUrl=url[1];
+  if (publicRoutes.includes(baseUrl)) {
     next();
   }
   else {
@@ -33,7 +34,7 @@ app.use((req, res, next) => {
   }
 });
 router.use(clientError);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/auth', users);
 app.use('/userRoles', roles);
 app.use('/attendanceType', attendance_type);
@@ -41,6 +42,6 @@ app.use('/branches', branches);
 app.use('/shifts', shifts);
 app.use('/attendance', time_attendance);
 app.use('/userShift', users_shifts);
-app.listen(3000, console.log('started'));
+app.listen(3000, console.log('http://localhost:3000'));
 
 
