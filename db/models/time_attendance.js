@@ -14,12 +14,12 @@ class Time_attendance extends Model {
             type: "object",
             properties: {
                 id: { type: 'integer', readOnly: true },
-                user_id: { type: "string" },
+                user_id: { type: "integer" },
                 shift_id: { type: "integer" },
                 branch_id: { type: "integer" },
                 attendance_type_id: { type: "integer" }
 
-            }
+            } 
         }
     };
 
@@ -28,7 +28,7 @@ class Time_attendance extends Model {
         const Attendace_type = require("./attendance_type");
         const Branches = require("./branches");
         const Shifts = require("./shifts");
-        const { Users } = require("./users");
+        const  Users  = require("./users");
         return {
             users: {
                 relation: Model.BelongsToOneRelation,

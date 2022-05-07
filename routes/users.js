@@ -6,10 +6,11 @@ const router = express.Router();
 router.post('/signup', async (req, res, next) => {
     try {
         const { body } = req;
-
+        console.log(body);
         const createdUser = await addUser(body);
         res.status(200).json({ createdUser })
     } catch (error) {
+
         next(error)
     }
 });
@@ -35,10 +36,10 @@ router.get('/users', async (req, res, next) => {
     }
 });
 
-router.get('/user', async(req,res,next)=>{
+router.get('/user/:id', async (req, res, next) => {
     try {
-        const user = await getUser(req.body);
-        res.status(200).json({user})
+        const user = await getUser(req.params.id);
+        res.status(200).json({ user })
     } catch (error) {
         next(error)
     }
@@ -48,17 +49,17 @@ router.put('/user/:id', async (req, res, next) => {
     try {
         const users = await updateUser(req.params.id, req.body);
         res.status(200).json({ users })
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 });
 
-router.delete('/user/:id', async(req, res, next)=>{
+router.delete('/user/:id', async (req, res, next) => {
     try {
-        const users = await deleteUser(req.params.id);
-        res.status(200).json({users})
+        const users = await deleteUser(req.params.id, req.body);
+        res.status(200).json({ users })
     } catch (error) {
-        next(err)
+        next(error)
     }
 });
 module.exports = router;

@@ -17,19 +17,19 @@ router.post('/shift', async (req, res, next) => {
 
 );
 
-router.get('/shift/:id', async(req, res, next)=>{
+router.get('/shift/:id', async (req, res, next) => {
     try {
         const shift = await getShift(req.params.id);
-        res.status(200).json({shift});
+        res.status(200).json({ shift });
     } catch (error) {
         next(error)
     }
 });
 
-router.get('/shifts', async(req, res, next)=>{
+router.get('/shifts', async (req, res, next) => {
     try {
         const shifts = await allShifts();
-        res.status(200).json({shifts});
+        res.status(200).json({ shifts });
     } catch (error) {
         next(error)
     }

@@ -5,7 +5,7 @@ const router = express.Router();
 const { newRole, allRoles, updateRole, deleteRole, getRole } = require('../controller/roles');
 
 
-router.post('/roles', async (req, res, next) => {
+router.post('/role', async (req, res, next) => {
     try {
         const { body } = req;
         const createdRole = await newRole(body);
@@ -47,10 +47,10 @@ router.delete('/role/:id', async (req, res, next) => {
     }
 });
 
-router.get('/role', async (req, res, next) => {
+router.get('/role/:id', async (req, res, next) => {
     try {
 
-        const roles = await getRole(req.body);
+        const roles = await getRole(req.params.id);
         res.status(200).json({ roles })
 
     } catch (error) {
