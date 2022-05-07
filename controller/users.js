@@ -16,7 +16,9 @@ const addUser = async ({ fullName, email, phone_number, password, role_id }) => 
 
         return newUser;
     } catch (error) {
-        throw new ErrorHandleing(message, statusCode);
+        console.log(error)
+        throw new ErrorHandleing(error.message, statusCode);
+
     }
 
 };
@@ -38,7 +40,7 @@ const login = async ({ email, password }) => {
 
 const getUser = async (id) => {
     try {
-        const getUser = await Users.query().withGraphFetched('roles').findOne(id);
+        const getUser = await Users.query().withGraphFetched('roles').findById(id);
         return getUser;
     } catch (error) {
         console.log(error);
@@ -51,36 +53,39 @@ const allUsers = async () => {
         const allUsers = await Users.query()
         return allUsers;
     } catch (error) {
-        throw new Error(error.message)
-
+        throw new ErrorHandleing(message, statusCode);
     }
 }
 
 const updateUser = async (id, {
     fullName,
     email,
-    phoneNumber,
-    password
+    phone_number,
+    password,
+    role_id
 }) => {
     try {
         const updatedItems = await Users.query().updateAndFetchById(id, {
-            full_name: fullName,
+            fullName,
             email,
-            phoneNumber,
-            password
+            phone_number,
+            password,
+            role_id
         })
         return updatedItems;
     } catch (error) {
-        throw new Error(err.message);
+        console.log(error)
+        throw new ErrorHandleing(error.message, statusCode);
     }
 }
 
-const deleteUser = async (id) => {
+const deleteUser = async (id,{fullName, email, phone_number, password, role_id}) => {
     try {
-        const deletedUser = await Users.query().deleteById(id)
-        return deletedUser;
+        const deletedUser = await Users.query().deleteById(id, { fullName, email, phone_number, password, role_id })
+        return "deleted one User";
     } catch (error) {
-        throw new Error(err.message)
+        console.log(error)
+        throw new ErrorHandleing(error.message, statusCode);
     }
 }
 

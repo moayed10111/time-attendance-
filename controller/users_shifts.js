@@ -42,7 +42,7 @@ const updateUserShifts = async (id, { user_id, shift_id }) => {
 const deleteUserShifts = async(id, {user_id, shift_id})=>{
     try {
         const deletedUserShifts= await Users_shifts.query().deleteById(id, {user_id, shift_id});
-        return "User Shit is deleted Succefully"
+        return "User Shift is deleted Succefully"
     } catch (error) {
         throw new ErrorHandleing(error.message, statusCode);
     }

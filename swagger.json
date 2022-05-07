@@ -20,6 +20,9 @@
     "paths": {
         "/users": {
             "get": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Get all the users",
                 "description": "Get all the users",
                 "produces": [
@@ -41,6 +44,9 @@
         },
         "/user/{id}": {
             "get": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Get one user",
                 "description": "Get one user",
                 "produces": [
@@ -52,7 +58,7 @@
                         "in": "path",
                         "description": "user id that needs to be found",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -68,6 +74,9 @@
                 }
             },
             "put": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "update user",
                 "description": "update user",
                 "produces": [
@@ -77,9 +86,37 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "update user",
+                        "description": "id for the targeted user",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "description": "update user",
+                        "name": "updated information",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "fullName": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "phone_number": {
+                                    "type": "integer"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "format": "password"
+                                },
+                                "role_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -95,6 +132,9 @@
                 }
             },
             "delete": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "delete user",
                 "description": "delete user",
                 "produces": [
@@ -106,7 +146,7 @@
                         "in": "path",
                         "description": "delete user",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -122,8 +162,11 @@
                 }
             }
         },
-        "/singup": {
+        "/signup": {
             "post": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "Add new user",
                 "description": "Add new user",
                 "produces": [
@@ -135,11 +178,25 @@
                         "name": "body",
                         "description": "new user",
                         "required": true,
+                        "type": "object",
                         "schema": {
-                            "type": "object",
                             "properties": {
-                                "user": {
-                                    "type": "object"
+                                "fullName": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "phone_number": {
+                                    "type": "integer"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "format": "password"
+                                },
+                                "role_id": {
+                                    "type": "integer"
                                 }
                             }
                         }
@@ -160,6 +217,9 @@
         },
         "/login": {
             "post": {
+                "tags": [
+                    "Users"
+                ],
                 "summary": "user login",
                 "description": "user login",
                 "produces": [
@@ -171,11 +231,16 @@
                         "name": "body",
                         "description": "user login",
                         "required": true,
+                        "type": "object",
                         "schema": {
-                            "type": "object",
                             "properties": {
-                                "user": {
-                                    "type": "object"
+                                "email": {
+                                    "type": "string",
+                                    "format": "email"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "format": "password"
                                 }
                             }
                         }
@@ -193,7 +258,1051 @@
                     }
                 }
             }
+        },
+        "/attendanceType": {
+            "post": {
+                "tags": [
+                    "Attendance Type"
+                ],
+                "summary": "Add new Attendance Type",
+                "description": "Add new Attendance Type",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Attendance Type",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/attendanceType/{id}": {
+            "get": {
+                "tags": [
+                    "Attendance Type"
+                ],
+                "summary": "Get one Attendance Type",
+                "description": "Get one Attendance Type",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Attendance ID that needs to be found",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Attendance Type"
+                ],
+                "summary": "update attendance type",
+                "description": "update attendance type",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the id for the attendance type that needs to be updated",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "update attendance type",
+                        "required": true,
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Attendance Type"
+                ],
+                "summary": "delete attendance type",
+                "description": "delete attendance type",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the id for the attendace type that needs to be deleted",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/attendanceTypes": {
+            "get": {
+                "tags": [
+                    "Attendance Type"
+                ],
+                "summary": "Get all attendance Types",
+                "description": "Get all attendance types",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/branches": {
+            "get": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "Get all branches",
+                "description": "Get all branches",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/branch/{id}": {
+            "get": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "get one branch",
+                "description": "Get one branch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "branch id that needs to be found",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "update branch",
+                "description": "update branch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update branch",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "updated information",
+                        "required": true,
+                        "type": "object",
+                        "properties": {
+                            "branch_name": {
+                                "type": "string"
+                            },
+                            "branch_location": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful update",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "delete branch",
+                "description": "delete branch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete branch",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "deleted branch",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/branch": {
+            "post": {
+                "tags": [
+                    "Branches"
+                ],
+                "summary": "Add new branch",
+                "description": "Add new branch",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "new branch",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "branch_name": {
+                                    "type": "string"
+                                },
+                                "branch_location": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Add new branch",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get all the roles",
+                "description": "Get all the roles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/role/{id}": {
+            "get": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get one role by id",
+                "description": "Get one role by id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "role id that needs to be found",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "update role",
+                "description": "update role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update role",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "updated information",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "role_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Delete role",
+                "description": "delete role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "delete role",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "deleted role",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/role": {
+            "post": {
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "new role",
+                "description": "new role",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "new role",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "role_name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/shifts": {
+            "get": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "Get all shifts",
+                "description": "get all the shifts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/shift/{id}": {
+            "get": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "Get one shift",
+                "description": "Get one shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "shift id that needs to be found",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "updat shift",
+                "description": "update shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "update shift",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "updated information",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "start_shift": {
+                                    "type": "string"
+                                },
+                                "end_shift": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "Delete shift",
+                "description": "Delete shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id for the shift that needs to be deleted",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/shift": {
+            "post": {
+                "tags": [
+                    "Shifts"
+                ],
+                "summary": "Add new shift",
+                "description": "Adde new shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "add new shift",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "start_shift": {
+                                    "type": "string"
+                                },
+                                "end_shift": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/timeAttendances": {
+            "get": {
+                "tags": [
+                    "Time Attendance"
+                ],
+                "summary": "Get all Time Attendances",
+                "description": "Get all Time Attendances",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/timeAttendance/{id}": {
+            "get": {
+                "tags": [
+                    "Time Attendance"
+                ],
+                "summary": "Get one Time Attendance",
+                "description": "Get one Time Attendance",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id for the targeted Time Attendance",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Time Attendance"
+                ],
+                "summary": "Update one Time Attendance",
+                "description": "Update one Time Attendance",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id for the targeted Time Attendance",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated information",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "shift_id": {
+                                    "type": "integer"
+                                },
+                                "branch_id": {
+                                    "type": "integer"
+                                },
+                                "attendance_type_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Time Attendance"
+                ],
+                "summary": "Delete Time Attendance",
+                "description": "Delete Time Attendance",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "The id for the targeted Time Attendance",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/timeAttendance": {
+            "post": {
+                "tags": [
+                    "Time Attendance"
+                ],
+                "summary": "Add a new Time Attendance ",
+                "description": "Add a new Time Attendance",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "discription": "New Time Attendance",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "shift_id": {
+                                    "type": "integer"
+                                },
+                                "branch_id": {
+                                    "type": "integer"
+                                },
+                                "attendance_type_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/userShifts": {
+            "get": {
+                "tags": [
+                    "Users Shifts"
+                ],
+                "summary": "Get all users shifts",
+                "description": "Get all users Shifts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/userShift/{id}": {
+            "get": {
+                "tags": [
+                    "Users Shifts"
+                ],
+                "summary": "Get one user shift",
+                "description": "Get one user shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "the id for the targeted user shift",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users Shifts"
+                ],
+                "summary": "update user shift",
+                "description": "update user shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "the id for the user shift that needs to updated",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "The updated information",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "shift_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users Shifts"
+                ],
+                "summary": "Delete user shift",
+                "description": "Delete user shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "the id for the targeted user shift",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value"
+                    }
+                }
+            }
+        },
+        "/userShift": {
+            "post": {
+                "tags": [
+                    "Users Shifts"
+                ],
+                "summary": "Add a new user shift",
+                "description": "Add a new user shift",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "New user shift",
+                        "required": true,
+                        "type": "object",
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer"
+                                },
+                                "shift_id": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400":{
+                        "description":"Invalid status value"
+                    }
+                }
+            }
         }
-       
     }
 }

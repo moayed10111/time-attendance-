@@ -15,22 +15,24 @@ class Users extends Model {
                 fullName: { type: 'string' },
                 email: { type: 'string' },
                 password: { type: 'string' },
+                phone_number: { type: "integer" },
                 role_id: { type: "integer" }
             }
         }
     }
     static get relationMappings() {
-        const Roles  = require('./roles')
-        return{
-        roles: {
-            relation: Model.BelongsToOneRelation,
-            modelClass: Roles,
-            join: {
-                from: 'users.role_id',
-                to: 'roles.id'
+        const Roles = require('./roles')
+        return {
+            roles: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Roles,
+                join: {
+                    from: 'users.role_id',
+                    to: 'roles.id'
+                }
             }
         }
-    }}
+    }
 
 
 };
